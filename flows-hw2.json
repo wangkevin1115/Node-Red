@@ -1,0 +1,93 @@
+[
+    {
+        "id": "7f393a46.364924",
+        "type": "tab",
+        "label": "流程2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3cc2ee91.d91f92",
+        "type": "inject",
+        "z": "7f393a46.364924",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "8c8cd047.d8b9f"
+            ]
+        ]
+    },
+    {
+        "id": "8c8cd047.d8b9f",
+        "type": "function",
+        "z": "7f393a46.364924",
+        "name": "payload",
+        "func": "msg.headers={\n    devicekey: \"SOTn0hv4ZVO3iwr8\"  \n    };\n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 490,
+        "y": 400,
+        "wires": [
+            [
+                "9fccf1bc.be3c7"
+            ]
+        ]
+    },
+    {
+        "id": "9fccf1bc.be3c7",
+        "type": "http request",
+        "z": "7f393a46.364924",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://api.mediatek.com/mcs/v2/devices/DUw0fxMb/datachannels/LEDControl/datapoints.csv",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 720,
+        "y": 400,
+        "wires": [
+            [
+                "348efc8a.737474",
+                "d205e889.cba528"
+            ]
+        ]
+    },
+    {
+        "id": "348efc8a.737474",
+        "type": "http response",
+        "z": "7f393a46.364924",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1000,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "d205e889.cba528",
+        "type": "debug",
+        "z": "7f393a46.364924",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 1000,
+        "y": 520,
+        "wires": []
+    }
+]
