@@ -1,0 +1,101 @@
+[
+    {
+        "id": "b65de4fc.dfd6f8",
+        "type": "tab",
+        "label": "流程4",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7d343634.2741e8",
+        "type": "http response",
+        "z": "b65de4fc.dfd6f8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 660,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9934f332.ced6e",
+        "type": "debug",
+        "z": "b65de4fc.dfd6f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 660,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "bed146a.13656b8",
+        "type": "http in",
+        "z": "b65de4fc.dfd6f8",
+        "name": "/GPIO",
+        "url": "/pin4",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "e2d7a937.9d5698"
+            ]
+        ]
+    },
+    {
+        "id": "d1c549ca.fd27f8",
+        "type": "rpi-gpio in",
+        "z": "b65de4fc.dfd6f8",
+        "name": "GPIO4",
+        "pin": "7",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "99fb36b2.ae0ab8"
+            ]
+        ]
+    },
+    {
+        "id": "99fb36b2.ae0ab8",
+        "type": "function",
+        "z": "b65de4fc.dfd6f8",
+        "name": "Set GPIO",
+        "func": "global.set(\"GPIO\", msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "9934f332.ced6e"
+            ]
+        ]
+    },
+    {
+        "id": "e2d7a937.9d5698",
+        "type": "function",
+        "z": "b65de4fc.dfd6f8",
+        "name": "Get GPIO",
+        "func": "msg.payload = global.get(\"GPIO\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 440,
+        "y": 220,
+        "wires": [
+            [
+                "7d343634.2741e8",
+                "9934f332.ced6e"
+            ]
+        ]
+    }
+]
